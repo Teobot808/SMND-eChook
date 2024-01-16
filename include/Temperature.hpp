@@ -1,7 +1,7 @@
 class Temperature {
 public:
-float readTempOne();
-float readTempTwo();
-float thermistorADCToCelcius(int rawADC);
+static float readTempOne();
+static float readTempTwo();
+static float thermistorADCToCelcius(int rawADC);
 
 };

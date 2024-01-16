@@ -3,6 +3,7 @@
 #include <Temperature.hpp>
 #include <math.h>
 #include <Arduino.h>
+#include <constants.hpp>
 
 
 //Board and Sensor Specific Calibrations
@@ -65,4 +66,18 @@ float Temperature::thermistorADCToCelcius(int rawADC)
 
   return (temperature);
 
+}
+
+float Temperature::readTempOne()
+{
+  float temp = Temperature::thermistorADCToCelcius(analogRead(TEMP1_IN_PIN)); //use the thermistor function to turn the ADC reading into a temperature
+
+  return (temp); //return Temperature.
+}
+
+float Temperature::readTempTwo()
+{
+  float temp = Temperature::thermistorADCToCelcius(analogRead(TEMP2_IN_PIN));
+
+  return (temp);
 }
