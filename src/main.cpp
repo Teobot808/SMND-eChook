@@ -16,6 +16,8 @@ void loop() {
   DataPacket::setKey("cell1Voltage", Battery::readCellVoltage(1));
   DataPacket::setKey("cell2Voltage", Battery::readCellVoltage(2));
   DataPacket::setKey("Temperature", Temperature::readTempOne());
+  DataPacket::setKey("Temperature", Temperature::readTempTwo());
+
 
   String packet = DataPacket::getJSON();
 
