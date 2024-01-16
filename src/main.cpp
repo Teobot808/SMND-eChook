@@ -19,6 +19,7 @@ void loop() {
   DataPacket::setKey("Temperature", Temperature::readTempTwo());
 
 
+
   String packet = DataPacket::getJSON();
 
   Bluetooth::sendData(packet);
