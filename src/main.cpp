@@ -5,6 +5,10 @@
 #include <DataPacket.hpp>
 #include <Temperature.hpp>
 #include <Bounce2.h>
+#include <time.hpp>
+#include <Speed.hpp>
+
+unsigned long long time::t = 0;
 
 void setup() {
   Bluetooth::init();
@@ -12,16 +16,24 @@ void setup() {
 }
 
 void loop() {
-  DataPacket::setKey("totalVoltage", Battery::readTotalVoltage());
-  DataPacket::setKey("cell1Voltage", Battery::readCellVoltage(1));
-  DataPacket::setKey("cell2Voltage", Battery::readCellVoltage(2));
-  DataPacket::setKey("Temperature", Temperature::readTempOne());
-  DataPacket::setKey("Temperature", Temperature::readTempTwo());
+  time::t = millis();
+  if ((time::t % 5000) == 0) {
+    DataPacket::setKey("totalVoltage", Battery::readTotalVoltage());
+    DataPacket::setKey("cell1Voltage", Battery::readCellVoltage(1));
+    DataPacket::setKey("cell2Voltage", Battery::readCellVoltage(2));
+    DataPacket::setKey("Temperature", Temperature::readTempOne());
+    DataPacket::setKey("Temperature", Temperature::readTempTwo());
+    DataPacket::setKey("RPM", Speed::readRPM());
+
+    String packet = DataPacket::getJSON();
+    Bluetooth::sendData(packet);
+  }
+
+  Speed::MeasureRPM();
 
 
 
-  String packet = DataPacket::getJSON();
+ // delay(5000);
 
-  Bluetooth::sendData(packet);
-  delay(5000);
+
 }
