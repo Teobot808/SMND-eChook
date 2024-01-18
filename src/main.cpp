@@ -24,6 +24,7 @@ void loop() {
     DataPacket::setKey("Temperature", Temperature::readTempOne());
     DataPacket::setKey("Temperature", Temperature::readTempTwo());
     DataPacket::setKey("RPM", Speed::readRPM());
+    DataPacket::setKey("speed", Speed::KmpH(Speed::readRPM()));
 
     String packet = DataPacket::getJSON();
     Bluetooth::sendData(packet);

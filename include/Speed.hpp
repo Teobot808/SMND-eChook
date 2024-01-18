@@ -8,6 +8,7 @@ public:
   static void MeasureRPM();
   static void init();
   static float readRPM();
+  static float KmpH(float RPM);
 };
 
 
